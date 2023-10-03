@@ -4,6 +4,7 @@ import Image from "next/image";
 import { urlForImage } from "../../../sanity/lib/image";
 import Link from "next/link";
 import { SanityProducts } from "@/interfaces";
+import AddtoCartProduct from "@/components/shared/AddToCartProduct";
 
 const getAllProducts = async () => {
   const query = `*[_type == "product"] | order(_createdAt asc) {
@@ -13,6 +14,7 @@ const getAllProducts = async () => {
     image,
     price,
     slug,
+    "category": category->title
 
   }`;
   const res = await client.fetch(query);
@@ -22,6 +24,7 @@ const getAllProducts = async () => {
 
 const AllProducts = async () => {
   const productsData: SanityProducts[] = await getAllProducts();
+  // console.log('productsData', productsData)
   return (
     <Wrapper>
       <div className="grid grid-cols-1 bs:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-20 place-items-center px-10">
@@ -44,6 +47,7 @@ const AllProducts = async () => {
           </div>
         ))}
       </div>
+
     </Wrapper>
   );
 };

@@ -1,23 +1,21 @@
-import { defineField, defineType } from "sanity";
-
-export default defineType({
-  name: "category",
+export const productType = {
+  name: "productType",
+  title: "productType",
   type: "document",
-  title: "Category",
   fields: [
-    defineField({
-      name: "name",
-      type: "string",
-      title: "Category Name",
-    }),
-    defineField({
-      name: "slug",
-      type: "slug",
-      title: "Slug",
-      options: {
-        source: "slug",
-        maxLength: 96,
+      {
+          name: "title",
+          title: "Title",
+          type: "string",
       },
-    }),
+      {
+          name: "slug",
+          title: "Slug",
+          type: "slug",
+          options: {
+              source: "title",
+              maxLength: 96,
+          },
+      },
   ],
-});
+};

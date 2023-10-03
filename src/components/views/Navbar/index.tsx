@@ -18,7 +18,7 @@ const Navbar = () => {
   const [nav, setNav] = useState(false);
   const totalItems = useAppSelector((state) => state.cart.totalQuantity);
 
- 
+
 
   const handleNav = () => {
     setNav(!nav);
@@ -30,7 +30,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center w-full h-20 max-w-[1240px] mx-auto">
         <div>
           <Link href={"/"}>
-            <Image src={Logo} alt="Logo"/>
+            <Image src={Logo} alt="Logo" />
           </Link>
         </div>
         <div className="hidden lg:block">
@@ -62,11 +62,10 @@ const Navbar = () => {
       </div>
       {/* Mobile Srceen */}
       <div
-        className={`${
-          nav
-            ? "flex lg:hidden flex-col w-full h-screen items-center fixed top-0 left-0 z-[100] bg-white px-5 "
-            : "flex lg:hidden flex-col w-full h-screen items-center fixed top-[-100%] left-0 z-[100] bg-white px-5 "
-        }`}
+        className={`${nav
+          ? "flex lg:hidden flex-col w-full h-screen items-center fixed top-0 left-0 z-[100] bg-white px-5 "
+          : "flex lg:hidden flex-col w-full h-screen items-center fixed top-[-100%] left-0 z-[100] bg-white px-5 "
+          }`}
       >
         <div className="flex justify-between items-center w-full h-20">
           <div>

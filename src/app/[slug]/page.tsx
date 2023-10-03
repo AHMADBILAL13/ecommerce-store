@@ -13,8 +13,9 @@ type Props = {
 
 const getProductsbyCategory = async ({ params }: Props) => {
   const str = params.slug;
-  const str2 = str.charAt(0).toUpperCase() + str.slice(1);
-  const query = `*[_type == "product" && category -> name == "${str2}"] | order(_createdAt asc) {
+  const str2 = str.charAt(0).toLowerCase() + str.slice(1);
+  console.log('str2', str2)
+  const query = `*[_type == "product" && category -> title == "${str2}"] | order(_createdAt asc) {
     _id,
     name,
     image,
@@ -74,15 +75,4 @@ type ICategory = {
   };
 };
 
-// export async function generateStaticParams() {
-//   const query = `*[_type == "category"] {
-//       slug {
-//       current
-//       }
-//   }`;
-//   const res: ICategory[] = await client.fetch(query);
 
-//   return res.map((category) => ({
-//     slug: category.slug.current,
-//   }));
-// }

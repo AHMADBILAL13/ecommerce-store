@@ -130,3 +130,4 @@ export const selectIsLoading = (state: RootState) => state.cart.isLoading;
 export const cartActions = cartSlice.actions;
 
 export default cartSlice.reducer;
+
