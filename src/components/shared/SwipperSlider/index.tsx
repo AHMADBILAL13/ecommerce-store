@@ -4,26 +4,32 @@ import "swiper/css";
 import Image from "next/image";
 import Link from "next/link";
 import { urlForImage } from "../../../../sanity/lib/image";
-import { client } from "../../../../sanity/lib/client";
-import { SanityProducts } from "@/interfaces";
+import { getProducts } from "@/lib/mock";
+import { useEffect, useState } from "react";
 
-const getProducts = async () => {
-  const query = `*[_type == "product"] | order(_createdAt asc) {
-    _id,
-    image,
-    name,
-    slug {
-      current,
+export default function SwipperSlidder() {
+  const [data, setData] = useState([
+    {
+      price: "",
+      name: "",
+      slug: "",
+      image:"",
+      // titleTeam: "",
+      // TeamMembers: [{ memberName: "", position: "", memberImage: "" }],
     },
-    price,
-  }`;
+  ]);
 
-  const res = client.fetch(query);
-  return res;
-};
+  useEffect(() => {
+    getData(); // Default category set to "Residential"
+  }, []);
 
-const SwipperSlidder = async () => {
-  const products: SanityProducts[] = await getProducts();
+  const getData = async () => {
+    const products = await getProducts();
+    setData(products);
+
+    console.log("products", products);
+  };
+
   return (
     <>
       <Swiper
@@ -42,13 +48,13 @@ const SwipperSlidder = async () => {
         }}
         spaceBetween={10}
       >
-        {products.map((p, index) => (
+        {data.map((p, index) => (
           <SwiperSlide key={index}>
             <div className="flex flex-col justify-center px-5 py-10 items-center">
               <div className="flex flex-col justify-center items-start h-[400px] mx-10 w-full hover:scale-110 ease-in duration-300 gap-3">
-                <Link href={`products/${p.slug.current}`}>
+                <Link href={`products/${p.slug}`}>
                   <Image
-                    src={urlForImage(p.image[0]).url()}
+                    src={p.image}
                     alt={p.name}
                     width={400}
                     height={400}
@@ -65,6 +71,4 @@ const SwipperSlidder = async () => {
       </Swiper>
     </>
   );
-};
-
-export default SwipperSlidder;
+}

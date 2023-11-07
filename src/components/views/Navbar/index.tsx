@@ -9,10 +9,9 @@ import Image from "next/image";
 import Link from "next/link";
 import Menu from "@/components/shared/Menu";
 import { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { fetchData } from "@/redux/features/cartSlice";
+import { useAppSelector } from "@/redux/store";
 import { UserButton } from "@clerk/nextjs";
-import Logo from "../../../../public/logo.png"
+import Logo from "/public/logo.png"
 const Navbar = () => {
 
   const [nav, setNav] = useState(false);
@@ -70,7 +69,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center w-full h-20">
           <div>
             <Link href={"/"}>
-              <Image src="/Logo.webp" alt="" width={150} height={150} />
+              <Image src="/Logo.png" alt="" width={150} height={150} />
             </Link>
           </div>
           <div>
